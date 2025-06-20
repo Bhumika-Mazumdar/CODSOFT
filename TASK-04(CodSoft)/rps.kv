@@ -1,0 +1,76 @@
+<RPSGame>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "assets/background.jpg"
+
+    orientation: "vertical"
+    padding: 20
+    spacing: 15
+
+    Label:
+        text: "Rock-Paper-Scissors Game"
+        font_size: 32
+        size_hint_y: 0.15
+        bold: True
+        color: 1, 1, 1, 1
+
+    BoxLayout:
+        spacing: 20
+        size_hint_y: 0.25
+
+        Button:
+            on_release: root.play("Rock")
+            background_normal: 'assets/rock.png'
+            background_down: 'assets/rock.png'
+            size_hint_x: 0.33
+
+        Button:
+            on_release: root.play("Paper")
+            background_normal: 'assets/paper.png'
+            background_down: 'assets/paper.png'
+            size_hint_x: 0.33
+
+        Button:
+            on_release: root.play("Scissors")
+            background_normal: 'assets/scissors.png'
+            background_down: 'assets/scissors.png'
+            size_hint_x: 0.33
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_y: 0.3
+        Label:
+            text: "Your Choice: " + root.user_choice
+            font_size: 20
+            color: 1, 1, 1, 1
+        Label:
+            text: "Computer's Choice: " + root.computer_choice
+            font_size: 20
+            color: 1, 1, 1, 1
+        Label:
+            text: root.result
+            font_size: 24
+            bold: True
+            color: 1, 0.8, 0, 1
+
+    BoxLayout:
+        spacing: 40
+        size_hint_y: 0.15
+        Label:
+            text: "Your Score: " + str(root.user_score)
+            font_size: 20
+            color: 13, 13, 12
+        Label:
+            text: "Computer Score: " + str(root.computer_score)
+            font_size: 20
+            color: 13, 13, 12
+
+    Button:
+        text: "Play Again"
+        size_hint_y: 0.1
+        font_size: 20
+        on_release: root.reset_game()
+        background_color: 0.3, 0.3, 0.7, 1
+        color: 1, 1, 1, 1
