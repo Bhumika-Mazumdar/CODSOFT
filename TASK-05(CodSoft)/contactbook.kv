@@ -1,0 +1,136 @@
+ScreenManager:
+    HomeScreen:
+    AddContactScreen:
+    ViewContactScreen:
+    ContactDetailScreen:
+    SearchContactScreen:
+
+<HomeScreen>:
+    name: "home"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 20
+        padding: 40
+        Button:
+            text: "Add Contact"
+            on_release: root.manager.current = "add"
+        Button:
+            text: "View All Contacts"
+            on_release: root.manager.current = "view"
+        Button:
+            text: "Search Contact"
+            on_release: root.manager.current = "search"
+
+<AddContactScreen>:
+    name: "add"
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 10
+        TextInput:
+            id: name_input
+            hint_text: "Name"
+        TextInput:
+            id: phone_input
+            hint_text: "Phone"
+        TextInput:
+            id: email_input
+            hint_text: "Email"
+        TextInput:
+            id: address_input
+            hint_text: "Address"
+        Button:
+            text: "Add Contact"
+            on_release: root.add_contact()
+        Button:
+            text: "Back"
+            on_release: root.manager.current = "home"
+
+<ViewContactScreen>:
+    name: "view"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        padding: 10
+
+        Label:
+            text: "All Contacts"
+            font_size: 24
+            size_hint_y: None
+            height: 50
+
+        RecycleView:
+            id: contact_list
+            viewclass: "Button"
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: "vertical"
+
+        Button:
+            text: "Back to Home"
+            size_hint_y: None
+            height: 50
+            on_release:
+                app.root.current = "home"
+
+
+<ContactDetailScreen>:
+    name: "detail"
+    contact_id: ""
+    BoxLayout:
+        orientation: "vertical"
+        TextInput:
+            id: name
+            hint_text: "Name"
+        TextInput:
+            id: phone
+            hint_text: "Phone"
+        TextInput:
+            id: email
+            hint_text: "Email"
+        TextInput:
+            id: address
+            hint_text: "Address"
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 10
+            Button:
+                text: "Update"
+                on_release: root.update_contact()
+            Button:
+                text: "Delete"
+                on_release: root.delete_contact()
+        Button:
+            text: "Back"
+            size_hint_y: None
+            height: 50
+            on_release: root.manager.current = "view"
+
+<SearchContactScreen>:
+    name: "search"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        padding: 20
+        TextInput:
+            id: search_input
+            hint_text: "Enter name or phone number"
+        Button:
+            text: "Search"
+            on_release: root.search()
+        RecycleView:
+            viewclass: "Button"
+            id: result_list
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: "vertical"
+        Button:
+            text: "Back"
+            on_release: root.manager.current = "home"
